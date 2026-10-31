@@ -1,0 +1,6 @@
+{
+  "name": "Sukoon",
+  "description": "A calm, trauma-informed, accessible companion for moments of stress.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

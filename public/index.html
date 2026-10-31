@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#F6F3EE" />
+    <title>Sukoon — Quiet Companion for Stress</title>
+    <meta
+      name="description"
+      content="Sukoon is a free, calm AI companion and offline grounding space for moments of stress."
+    />
+    <meta property="og:title" content="Sukoon — Quiet Companion for Stress" />
+    <meta
+      property="og:description"
+      content="Sukoon is a free, calm AI companion and offline grounding space for moments of stress."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div id="app-shell" class="app-shell">
+      <header class="site-header" role="banner">
+        <div class="header-start">
+          <span id="header-brand-name" class="brand-name">Sukoon</span>
+          <button
+            type="button"
+            id="header-back-btn"
+            class="btn-secondary"
+            data-action="back-to-chat"
+            hidden
+          >
+            Back to chat
+          </button>
+        </div>
+
+        <div class="header-end">
+          <button
+            type="button"
+            id="header-help-btn"
+            class="btn-help-now"
+            data-action="open-help"
+            data-emphasised="false"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+              ></path>
+            </svg>
+            <span>Get help now</span>
+          </button>
+
+          <button
+            type="button"
+            id="header-menu-btn"
+            class="btn-icon-menu"
+            aria-label="More options"
+            data-action="open-menu"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="1.5"></circle>
+              <circle cx="19" cy="12" r="1.5"></circle>
+              <circle cx="5" cy="12" r="1.5"></circle>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <div id="offline-banner" class="offline-banner" role="status" aria-live="polite" hidden>
+        You're offline. Exercises and help options still work.
+      </div>
+
+      <main id="main-content" class="main-content">
+        <!-- 1. WELCOME VIEW -->
+        <section id="view-welcome" class="view-welcome" aria-labelledby="welcome-heading">
+          <div class="welcome-card">
+            <div class="welcome-header">
+              <h1 id="welcome-heading" class="welcome-title">Sukoon</h1>
+              <p class="welcome-subtitle">A quiet space to pause when things feel heavy.</p>
+            </div>
+
+            <ul class="honest-list" aria-label="What to know before starting">
+              <li class="honest-item">
+                <span>I'm an AI, not a therapist.</span>
+              </li>
+              <li class="honest-item">
+                <span>I can't handle emergencies. If you're in danger, help is one tap away.</span>
+              </li>
+              <li class="honest-item">
+                <span>We don't save your chat. Your messages are sent to an AI service so it can write a reply.</span>
+              </li>
+            </ul>
+
+            <div class="welcome-actions">
+              <button
+                type="button"
+                class="btn-primary btn-wide"
+                data-action="welcome-continue"
+              >
+                Continue
+              </button>
+              <button
+                type="button"
+                class="btn-quiet btn-wide"
+                data-action="open-how-it-works"
+              >
+                How this works
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. CHAT VIEW -->
+        <section id="view-chat" class="view-chat" hidden>
+          <div class="chat-scroll-region">
+            <div id="chat-empty-state"></div>
+            <div
+              id="chat-message-list"
+              class="chat-message-list"
+              role="log"
+              aria-live="polite"
+              aria-relevant="additions"
+              hidden
+            ></div>
+          </div>
+
+          <div class="chat-composer-bar">
+            <form id="chat-composer-form" class="composer-form" novalidate>
+              <div class="composer-input-wrap">
+                <label for="chat-composer-input" class="visually-hidden">Your message</label>
+                <textarea
+                  id="chat-composer-input"
+                  class="composer-textarea"
+                  rows="1"
+                  maxlength="1000"
+                  dir="auto"
+                  placeholder="Write whatever is on your mind..."
+                ></textarea>
+                <div id="composer-char-counter" class="composer-char-counter" aria-live="polite" hidden></div>
+              </div>
+              <button type="submit" id="chat-send-btn" class="btn-send" aria-label="Send message">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </form>
+          </div>
+        </section>
+
+        <!-- 4. EXERCISES VIEW -->
+        <section id="view-exercise" class="view-exercise" hidden>
+          <div id="exercise-stage-container" class="exercise-stage-container"></div>
+        </section>
+      </main>
+    </div>
+
+    <!-- MODAL: HELP SHEET -->
+    <div
+      id="modal-help"
+      class="modal-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-help-title"
+      aria-hidden="true"
+      hidden
+    >
+      <div class="modal-backdrop"></div>
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <h2 id="modal-help-title" class="modal-title">Support options</h2>
+          <button type="button" class="modal-close-btn" data-action="close-modal" data-autofocus>
+            Close
+          </button>
+        </div>
+        <p class="view-subtitle">Free, confidential people you can reach out to right now.</p>
+        <div id="help-sheet-body" class="help-sheet-body"></div>
+      </div>
+    </div>
+
+    <!-- MODAL: EXERCISE PICKER -->
+    <div
+      id="modal-exercises"
+      class="modal-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-exercises-title"
+      aria-hidden="true"
+      hidden
+    >
+      <div class="modal-backdrop"></div>
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <h2 id="modal-exercises-title" class="modal-title">Quiet exercises</h2>
+          <button type="button" class="modal-close-btn" data-action="close-modal" data-autofocus>
+            Close
+          </button>
+        </div>
+        <p class="view-subtitle">All exercises stay on your device and work offline.</p>
+        <div class="exercise-picker-list">
+          <button
+            type="button"
+            class="exercise-picker-card"
+            data-action="start-exercise"
+            data-exercise="breathing"
+          >
+            <div class="exercise-picker-top">
+              <span>Breathing</span>
+              <span class="exercise-picker-duration">1–3 min</span>
+            </div>
+            <span class="exercise-picker-desc">A gentle rhythm to help your shoulders drop.</span>
+          </button>
+
+          <button
+            type="button"
+            class="exercise-picker-card"
+            data-action="start-exercise"
+            data-exercise="grounding"
+          >
+            <div class="exercise-picker-top">
+              <span>Grounding 5-4-3-2-1</span>
+              <span class="exercise-picker-duration">3 min</span>
+            </div>
+            <span class="exercise-picker-desc">Notice five simple things around you right now.</span>
+          </button>
+
+          <button
+            type="button"
+            class="exercise-picker-card"
+            data-action="start-exercise"
+            data-exercise="brain_dump"
+          >
+            <div class="exercise-picker-top">
+              <span>Brain dump</span>
+              <span class="exercise-picker-duration">3 min</span>
+            </div>
+            <span class="exercise-picker-desc">Set your thoughts down on paper and sort only what you can influence.</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: MORE OPTIONS MENU -->
+    <div
+      id="modal-menu"
+      class="modal-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-menu-title"
+      aria-hidden="true"
+      hidden
+    >
+      <div class="modal-backdrop"></div>
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <h2 id="modal-menu-title" class="modal-title">Options</h2>
+          <button type="button" class="modal-close-btn" data-action="close-modal" data-autofocus>
+            Close
+          </button>
+        </div>
+
+        <div class="menu-list">
+          <button type="button" class="menu-action-btn" data-action="open-exercises">
+            <span>Exercises</span>
+          </button>
+          <button type="button" class="menu-action-btn" data-action="clear-chat">
+            <span>Clear chat</span>
+          </button>
+          <button type="button" class="menu-action-btn" data-action="clear-and-leave">
+            <span>Clear and leave</span>
+          </button>
+          <button type="button" class="menu-action-btn" data-action="open-about">
+            <span>About</span>
+          </button>
+        </div>
+
+        <fieldset class="option-fieldset">
+          <legend class="option-legend">Theme</legend>
+          <div class="segmented-group" role="group" aria-label="Theme">
+            <button type="button" class="segment-btn is-selected" data-theme-opt="system" aria-pressed="true">
+              <span class="segment-title">System</span>
+            </button>
+            <button type="button" class="segment-btn" data-theme-opt="light" aria-pressed="false">
+              <span class="segment-title">Light</span>
+            </button>
+            <button type="button" class="segment-btn" data-theme-opt="dark" aria-pressed="false">
+              <span class="segment-title">Dark</span>
+            </button>
+          </div>
+        </fieldset>
+
+        <fieldset class="option-fieldset">
+          <legend class="option-legend">Text size</legend>
+          <div class="segmented-group" role="group" aria-label="Text size">
+            <button type="button" class="segment-btn is-selected" data-size-opt="normal" aria-pressed="true">
+              <span class="segment-title">Standard</span>
+            </button>
+            <button type="button" class="segment-btn" data-size-opt="large" aria-pressed="false">
+              <span class="segment-title">Larger</span>
+            </button>
+            <button type="button" class="segment-btn" data-size-opt="xlarge" aria-pressed="false">
+              <span class="segment-title">Largest</span>
+            </button>
+          </div>
+        </fieldset>
+
+        <fieldset class="option-fieldset">
+          <legend class="option-legend">Motion</legend>
+          <div class="segmented-group" role="group" aria-label="Motion">
+            <button type="button" class="segment-btn is-selected" data-motion-opt="system" aria-pressed="true">
+              <span class="segment-title">System</span>
+            </button>
+            <button type="button" class="segment-btn" data-motion-opt="on" aria-pressed="false">
+              <span class="segment-title">Reduce</span>
+            </button>
+            <button type="button" class="segment-btn" data-motion-opt="off" aria-pressed="false">
+              <span class="segment-title">Standard</span>
+            </button>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+
+    <!-- MODAL: HOW THIS WORKS -->
+    <div
+      id="modal-how-it-works"
+      class="modal-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-hiw-title"
+      aria-hidden="true"
+      hidden
+    >
+      <div class="modal-backdrop"></div>
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <h2 id="modal-hiw-title" class="modal-title">How this works</h2>
+          <button type="button" class="modal-close-btn" data-action="close-modal" data-autofocus>
+            Close
+          </button>
+        </div>
+        <div class="info-sections">
+          <div class="info-section">
+            <h3>What this space is</h3>
+            <p>
+              Sukoon is a free, quiet companion for moments of everyday stress. You can talk through what is on your mind or use offline exercises at your own pace.
+            </p>
+          </div>
+          <div class="info-section">
+            <h3>Your privacy</h3>
+            <p>
+              We do not ask for your name, email, or account. We do not use cookies or analytics. Your conversation stays only in this browser tab until you close it or clear it. When you send a message, the recent turns are sent to an AI language service so it can generate a reply.
+            </p>
+          </div>
+          <div class="info-section">
+            <h3>Important limits</h3>
+            <p>
+              An AI cannot replace human care, medical advice, or crisis support. Whenever things feel too heavy, you can reach free, confidential human helplines with one tap.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: ABOUT -->
+    <div
+      id="modal-about"
+      class="modal-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-about-title"
+      aria-hidden="true"
+      hidden
+    >
+      <div class="modal-backdrop"></div>
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <h2 id="modal-about-title" class="modal-title">About Sukoon</h2>
+          <button type="button" class="modal-close-btn" data-action="close-modal" data-autofocus>
+            Close
+          </button>
+        </div>
+        <div class="info-sections">
+          <div class="info-section">
+            <h3>What this is</h3>
+            <p>
+              Sukoon is a calm companion designed for low-energy moments when stress builds up. Everything here is an invitation—you are always in control of what to share, skip, or clear.
+            </p>
+          </div>
+          <div class="info-section">
+            <h3>What this is not</h3>
+            <p>
+              This is an AI tool, not a human counsellor or emergency service. It does not diagnose, judge, or keep records about you.
+            </p>
+          </div>
+          <div class="info-section">
+            <h3>Privacy in plain words</h3>
+            <p>
+              Your chat lives only in temporary session memory in this tab. Exercises run entirely on your device and never send anything to a server. Tapping "Clear and leave" erases all temporary data and takes you to a neutral web page.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/js/app.js"></script>
+  </body>
+</html>

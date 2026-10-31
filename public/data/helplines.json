@@ -1,0 +1,151 @@
+{
+  "lastVerified": "2026-10-01",
+  "directory": {
+    "name": "Find A Helpline",
+    "url": "https://findahelpline.com"
+  },
+  "countries": {
+    "PK": {
+      "code": "PK",
+      "name": "Pakistan",
+      "lastVerified": "2026-10-01",
+      "emergency": {
+        "name": "Rescue & Emergency Services",
+        "number": "1122",
+        "hours": "24 hours, every day",
+        "show": true
+      },
+      "lines": [
+        {
+          "id": "pk-umang",
+          "name": "Umang Pakistan Helpline",
+          "number": "0311-7786264",
+          "hours": "24 hours, confidential emotional support (Urdu & English)",
+          "show": true
+        },
+        {
+          "id": "pk-taskeen",
+          "name": "Taskeen Health Initiative",
+          "number": "0316-8275336",
+          "hours": "Mon–Sat, 9:00 AM – 5:00 PM PKT",
+          "show": true
+        },
+        {
+          "id": "pk-rozan",
+          "name": "Rozan Counselling Helpline",
+          "number": "0304-1111741",
+          "hours": "Mon–Fri, 9:00 AM – 5:00 PM PKT",
+          "show": true
+        },
+        {
+          "id": "pk-unverified-legacy",
+          "name": "Unverified Regional Line (Archived)",
+          "number": "0800-00000",
+          "hours": "Inactive",
+          "show": false
+        }
+      ]
+    },
+    "GB": {
+      "code": "GB",
+      "name": "United Kingdom",
+      "lastVerified": "2026-10-01",
+      "emergency": {
+        "name": "UK Emergency Services",
+        "number": "999",
+        "hours": "24 hours, every day",
+        "show": true
+      },
+      "lines": [
+        {
+          "id": "gb-samaritans",
+          "name": "Samaritans",
+          "number": "116123",
+          "hours": "24 hours, free from any phone",
+          "show": true
+        },
+        {
+          "id": "gb-nhs",
+          "name": "NHS Mental Health Services",
+          "number": "111",
+          "hours": "24 hours, every day",
+          "show": true
+        },
+        {
+          "id": "gb-inactive",
+          "name": "Legacy Line",
+          "number": "0800-999999",
+          "hours": "Closed",
+          "show": false
+        }
+      ]
+    },
+    "US": {
+      "code": "US",
+      "name": "United States",
+      "lastVerified": "2026-10-01",
+      "emergency": {
+        "name": "Emergency Services",
+        "number": "911",
+        "hours": "24 hours, every day",
+        "show": true
+      },
+      "lines": [
+        {
+          "id": "us-988",
+          "name": "988 Suicide & Crisis Lifeline",
+          "number": "988",
+          "hours": "24 hours, free and confidential",
+          "show": true
+        }
+      ]
+    },
+    "IN": {
+      "code": "IN",
+      "name": "India",
+      "lastVerified": "2026-10-01",
+      "emergency": {
+        "name": "National Emergency Number",
+        "number": "112",
+        "hours": "24 hours, every day",
+        "show": true
+      },
+      "lines": [
+        {
+          "id": "in-telemanas",
+          "name": "Tele-MANAS",
+          "number": "14416",
+          "hours": "24 hours, toll-free across India",
+          "show": true
+        },
+        {
+          "id": "in-vandrevala",
+          "name": "Vandrevala Foundation",
+          "number": "+919999666555",
+          "hours": "24 hours, every day",
+          "show": true
+        }
+      ]
+    },
+    "CA": {
+      "code": "CA",
+      "name": "Canada",
+      "lastVerified": "2026-10-01",
+      "emergency": {
+        "name": "Emergency Services",
+        "number": "911",
+        "hours": "24 hours, every day",
+        "show": true
+      },
+      "lines": [
+        {
+          "id": "ca-988",
+          "name": "988 Suicide Crisis Helpline",
+          "number": "988",
+          "hours": "24 hours, English and French",
+          "show": true
+        }
+      ]
+    }
+  }
+}
