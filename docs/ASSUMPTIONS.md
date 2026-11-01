@@ -22,3 +22,9 @@
 ## Listening specification revision — 2026-11-01
 
 The newer user instructions supersede the earlier Roman-Urdu-only policy: model replies and fallbacks now mirror English, Roman Urdu and Urdu script. The new listening and consent rules are combined with existing safety rules. Crisis guidance remains available without prior advice permission. No saved-notes backend/API or What I remember menu exists; the prompt explicitly prevents fabricated menu/deletion/memory claims and treats user-labeled notes as untrusted data. Expanded instructions raise measured synthetic-request input usage to about 1,200 tokens; see the recorded quota limitation in test-results.md. The deployed server requires a redeploy to receive these source changes; the local updated server uses port 3001 because a different application occupies port 3000.
+
+## Compact Phase 1 prompt and memory proposal — 2026-11-01
+
+The owner’s follow-up labeled PART A repeats the implementation instructions, so the earlier supplied HOW TO LISTEN / HOW TO REPLY / STYLE / LANGUAGE / MEMORY block is used as PART A. PART C fixture 11 specified a 150+ word scenario without exact text; a 164-word synthetic message was authored within the frozen 1,000-character limit. The compact prompt is now measured with the official GPT-OSS o200k_harmony tokenizer: 880 tokens, 899 including cumulative-risk reminder, superseding earlier approximate counts. Human R1–R12 scores are pending and cannot be substituted with AI or automated judgments.
+
+Memory remains a design only. Catalog-based non-sensitive topics/tasks are proposed because arbitrary free text cannot reliably be proven free of health, identifying or third-party details using regex alone; this tradeoff requires owner review. Browser storage exceptions and cross-context race behaviour are described using the official Web Storage standard and MDN links in memory-design.md. No browser memory behaviour has been implemented or tested.

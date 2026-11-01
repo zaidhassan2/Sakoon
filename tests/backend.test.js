@@ -132,3 +132,14 @@ test('client notes are not promoted into trusted system instructions', async () 
  }}});
  assert.equal(result.status,200);
 });
+test('PART C Phase 1 fixtures fit the frozen request contract', async () => {
+ const {fixtures}=await import('../scripts/eval-fixtures.mjs');
+ const partC=fixtures.filter(f=>f.partC);
+ assert.equal(partC.length,14);
+ for(const fixture of partC) validate(fixture.body);
+ const rambling=partC.find(f=>f.id==='c11-rambling').body.messages[0].content;
+ assert.ok(rambling.split(/\s+/).length>=150);
+ assert.equal(partC.find(f=>f.id==='c06-numbness').risk,'elevated');
+ assert.equal(detect(partC.find(f=>f.id==='c06-numbness').body.messages[0].content),'elevated');
+ assert.ok(!partC.some(f=>'memory' in f.body));
+});

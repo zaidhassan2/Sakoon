@@ -8,7 +8,7 @@ Node ES-module Vercel functions serving the static frontend in `public/`. The ap
 2. Copy `.env.example` to `.env`. Obtain a free Groq key from [Groq Console](https://console.groq.com/keys), or a Gemini key from [AI Studio](https://aistudio.google.com/apikey). Keep billing disabled for a free-only deployment. Do not put keys in frontend files or variables starting with `VITE_`.
 3. Set `GROQ_API_KEY`, keep `LLM_PROVIDER=groq` and `LLM_MODEL=openai/gpt-oss-120b`. Set a random `RATE_LIMIT_SECRET` using the command in `.env.example`. Never commit `.env`.
 4. Run `npm run dev`; open `http://localhost:3000`. `GET /api/health` works without a key. Ordinary chat returns 503 without a working provider; detected crisis messages still receive a supportive 200 fallback.
-5. Run `npm test`, `npm run contract-check`, then `npm run eval`. Evaluation prints responses to bundled synthetic fixtures only and takes about nineteen minutes at its default quota-safe pacing. Do not use it for real conversations. Missing credentials exit with code 2 rather than pretending evaluation passed.
+5. Run `npm test`, `npm run contract-check`, then `npm run eval`. Evaluation prints content-free pass/fail results and takes about thirty-one minutes at its default quota-safe pacing. Set EVAL_REPORT=docs/phase1-eval-results.json to save replies to bundled synthetic fixtures for human review. Do not use it for real conversations. Missing credentials exit with code 2 rather than pretending evaluation passed.
 
 ## Deploy on Vercel Hobby
 
@@ -24,7 +24,7 @@ Groq default `openai/gpt-oss-120b` is listed in the [current model catalogue](ht
 
 To compare Gemini, set `LLM_PROVIDER=gemini`, `LLM_MODEL=gemini-3.8-flash`, and `GEMINI_API_KEY`, then restart/redeploy and rerun evaluation. This model is listed in the [current Gemini catalogue](https://ai.google.dev/gemini-api/docs/models). The adapter uses [generateContent REST](https://ai.google.dev/api/generate-content), structured JSON and low thinking. Check [pricing/free eligibility](https://ai.google.dev/gemini-api/docs/pricing) and [your active project limits](https://ai.google.dev/gemini-api/docs/rate-limits); exact account quotas could not be verified without credentials. New projects should not assume older Gemini 2.5 access. Model changes need fresh evaluation; arbitrary models may reject reasoning/JSON parameters.
 
-`EVAL_URL=https://your-domain/api/chat npm run eval` targets an existing endpoint. `EVAL_DELAY_MS` changes fixture pacing, but lowering it may hit application/provider quotas. The 45 fixtures check shape, length, formatting, banned phrases, minimum risk and heuristic language matching. Human review is still needed for empathy, clinical safety, subtle language, and diagnosis/medication claims.
+`EVAL_URL=https://your-domain/api/chat npm run eval` targets an existing endpoint. `EVAL_DELAY_MS` changes fixture pacing, but lowering it may hit application/provider quotas. The 59 fixtures check shape, length, formatting, banned phrases, minimum risk and heuristic language matching. Human review is still needed for empathy, clinical safety, subtle language, and diagnosis/medication claims.
 
 ## Privacy and rate limits
 
@@ -54,3 +54,7 @@ Replies use a familiar, respectful and emotionally attentive tone. The companion
 ## Listening and memory boundaries
 
 The companion considers situation, feeling and immediate need without exposing that analysis or labeling the person. It adapts its pace, acknowledges good news, explores decisions without choosing, and respects quiet social preferences. Crisis safety guidance remains an exception to advice permission. USER-APPROVED NOTES text is untrusted data, never system instructions; no persistent notes feature exists. The model must not invent remembered facts, claim deletion or direct users to a nonexistent What I remember menu. Existing Clear and leave clears the browser chat, not provider records.
+
+## Phase 1 prompt and review
+
+The compact stress prompt measures 880 GPT-OSS tokens (899 with the cumulative-risk reminder); see `docs/prompt-notes.md` and the development-only `scripts/measure-prompt.py`. The API and state enum remain frozen. PART C adds fourteen Phase 1 fixtures; its memory-field injection fixture is deferred. `node scripts/prepare-human-review.mjs` creates blank R1–R12 scoring tables from the synthetic evaluation artifact. Only a human may fill those scores. `docs/memory-design.md` is a review-only proposal; no memory implementation starts before the owner says **approve memory** and approves coordinated client/server changes.
