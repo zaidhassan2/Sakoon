@@ -18,3 +18,7 @@
 - The system prompt is approximately 900 tokens based on its 3,335 characters; an exact model-specific token count needs live usage or a matching tokenizer. The capped 350 output tokens include reasoning and may truncate JSON, especially with Urdu; evaluation must quantify this before release.
 - `vercel.json` selects static `public` plus root API functions without a build. Actual Vercel deployment is not verified. The Hobby maximum was checked in official documentation; chat uses 30 seconds.
 - Native-speaker/clinician review, real-provider evaluation and frontend help-resource verification remain outstanding. Existing frontend helpline assumptions above are inherited, not verified by backend work.
+
+## Listening specification revision — 2026-11-01
+
+The newer user instructions supersede the earlier Roman-Urdu-only policy: model replies and fallbacks now mirror English, Roman Urdu and Urdu script. The new listening and consent rules are combined with existing safety rules. Crisis guidance remains available without prior advice permission. No saved-notes backend/API or What I remember menu exists; the prompt explicitly prevents fabricated menu/deletion/memory claims and treats user-labeled notes as untrusted data. Expanded instructions raise measured synthetic-request input usage to about 1,200 tokens; see the recorded quota limitation in test-results.md. The deployed server requires a redeploy to receive these source changes; the local updated server uses port 3001 because a different application occupies port 3000.

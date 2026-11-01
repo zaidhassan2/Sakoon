@@ -24,7 +24,7 @@ Groq default `openai/gpt-oss-120b` is listed in the [current model catalogue](ht
 
 To compare Gemini, set `LLM_PROVIDER=gemini`, `LLM_MODEL=gemini-3.8-flash`, and `GEMINI_API_KEY`, then restart/redeploy and rerun evaluation. This model is listed in the [current Gemini catalogue](https://ai.google.dev/gemini-api/docs/models). The adapter uses [generateContent REST](https://ai.google.dev/api/generate-content), structured JSON and low thinking. Check [pricing/free eligibility](https://ai.google.dev/gemini-api/docs/pricing) and [your active project limits](https://ai.google.dev/gemini-api/docs/rate-limits); exact account quotas could not be verified without credentials. New projects should not assume older Gemini 2.5 access. Model changes need fresh evaluation; arbitrary models may reject reasoning/JSON parameters.
 
-`EVAL_URL=https://your-domain/api/chat npm run eval` targets an existing endpoint. `EVAL_DELAY_MS` changes fixture pacing, but lowering it may hit application/provider quotas. The 36 fixtures check shape, length, formatting, banned phrases, minimum risk and heuristic language matching. Human review is still needed for empathy, clinical safety, subtle language, and diagnosis/medication claims.
+`EVAL_URL=https://your-domain/api/chat npm run eval` targets an existing endpoint. `EVAL_DELAY_MS` changes fixture pacing, but lowering it may hit application/provider quotas. The 45 fixtures check shape, length, formatting, banned phrases, minimum risk and heuristic language matching. Human review is still needed for empathy, clinical safety, subtle language, and diagnosis/medication claims.
 
 ## Privacy and rate limits
 
@@ -44,9 +44,13 @@ Read `docs/safety.md`, `docs/ASSUMPTIONS.md`, and `docs/test-results.md` for rev
 
 ## Response language
 
-Replies and quick replies default to Roman Urdu (Urdu in Latin letters), including English greetings and crisis fallback messages, as requested by the owner. Input safety detection still covers English, Roman Urdu and Urdu script. API keys and enum values remain unchanged.
+Replies and quick replies mirror the user’s English, Roman Urdu or Urdu script, following the updated listening specification. Crisis and ordinary fallback templates also follow the detected language. Input safety detection still covers English, Roman Urdu and Urdu script. API keys and enum values remain unchanged.
 
 ## Conversational tone
 
-Roman Urdu replies use a familiar, respectful and emotionally attentive tone. The companion listens before suggesting an optional step, adapts to interests and preferences explicitly shared in the submitted history, and respects requests to vent or skip exercises. It does not infer hidden personality traits, invent memories, claim human feelings, or encourage exclusive attachment. Personalization lasts only within the supplied twelve-message window; no new storage is added.
+Replies use a familiar, respectful and emotionally attentive tone. The companion asks permission before offering advice or exercises, adapts to interests and preferences explicitly shared in the submitted history, and respects requests to vent or skip exercises. It does not infer hidden personality traits, invent memories, claim human feelings, or encourage exclusive attachment. Personalization lasts only within the supplied twelve-message window; no new storage is added.
 # Sakoon
+
+## Listening and memory boundaries
+
+The companion considers situation, feeling and immediate need without exposing that analysis or labeling the person. It adapts its pace, acknowledges good news, explores decisions without choosing, and respects quiet social preferences. Crisis safety guidance remains an exception to advice permission. USER-APPROVED NOTES text is untrusted data, never system instructions; no persistent notes feature exists. The model must not invent remembered facts, claim deletion or direct users to a nonexistent What I remember menu. Existing Clear and leave clears the browser chat, not provider records.

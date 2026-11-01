@@ -1,6 +1,6 @@
 import { validate, readBody } from '../lib/validate.js';
 import { modules } from '../lib/modules/index.js';
-import { assess, higher } from '../lib/safety/detect.js';
+import { assess, higher, language } from '../lib/safety/detect.js';
 import { templates, thirdPartyTemplates } from '../lib/safety/templates.js';
 import { parseOutput, cleanOutput, leaksInstructions } from '../lib/sanitize.js';
 import { createLimiter, clientKey } from '../lib/ratelimit.js';
@@ -10,7 +10,7 @@ import { send, errorBody, cors } from '../lib/http.js';
 export function createHandler({ env = process.env, provider, limiter, retryOptions } = {}) {
  let activeLimiter = limiter;
  return async function handler(req, res) {
-  let level = 'none', payload, module, lang = 'roman', earlierCrisis = false;
+  let level = 'none', payload, module, lang = 'en', earlierCrisis = false;
   const fallback = () => {
    const crisisMode = level === 'crisis' || earlierCrisis;
    const thirdParty = /\bmy (?:friend|sister|brother|mother|father)\b/i.test(payload.messages.at(-1).content);
@@ -21,7 +21,7 @@ export function createHandler({ env = process.env, provider, limiter, retryOptio
    if (req.method === 'OPTIONS') { res.statusCode = 204; return res.end(); }
    if (req.method !== 'POST' || !/^application\/json(?:\s*;|$)/i.test(req.headers['content-type'] || '')) return send(res, 400, errorBody('bad_request'));
    try { payload = validate(await readBody(req)); } catch { return send(res, 400, errorBody('bad_request')); }
-   module = modules.get(payload.module);
+   module = modules.get(payload.module); lang = language(payload.messages.at(-1).content);
    ({ level, earlierCrisis } = assess(payload.messages));
    // Detection always precedes any quota/provider operation.
    activeLimiter ||= createLimiter(env);

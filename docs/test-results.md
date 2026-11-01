@@ -61,3 +61,13 @@ No Vercel deploy, real Redis call, browser visual QA or clinician/native Urdu re
 ## Conversational tone follow-up
 
 After updating the Roman Urdu tone instructions, `npm test` passed and direct `node:test` execution reported 32 passed, zero failed. Three synthetic requests through the local endpoint returned HTTP 200, source model, and heuristic Roman Urdu matches. The venting fixture returned no exercise; the drawing-interest fixture referenced that shared interest. No response content was logged. These spot checks do not substitute for the full 36-fixture evaluation or human tone/safety review.
+
+## Listening specification update — 2026-11-01 (Asia/Karachi)
+
+- `npm test`: both backend and existing frontend test files passed, zero failures.
+- `node tests/backend.test.js`: 34 tests passed, zero failures.
+- `node scripts/contract-check.mjs`: 28 local HTTP checks passed, zero failures.
+- Nine new synthetic listening fixtures checked against the real Groq provider through `http://localhost:3001/api/chat`. Eight passed initially; the notes-injection fixture initially failed at the endpoint because Groq returned 429. A diagnostic retry also returned 429 with retryAfterSeconds 2. After that delay, the full fixture assertions passed. Final coverage: all nine fixtures passed at least once; not a rate-limit-free batch.
+- Live checks verified HTTP/contract shape, source model, heuristic language matching, no unsolicited exercise card and fixture-specific prohibited-wording patterns. Responses were not logged. This does not establish full semantic compliance, empathy or clinical effectiveness. The full evaluation suite now has 45 fixtures; the entire suite was not rerun in this update.
+- Observed live input usage for the listening fixtures was approximately 1,188–1,208 tokens per request, including the expanded listening/safety prompt and synthetic message. This exceeds the original approximate 900-token prompt target; the twenty-second timeout, twelve-message history and 350-token output cap remain. Pace evaluations using the default delay to avoid the free-tier minute limit.
+- Port 3000 belongs to a separate outreach-agent process, which was left untouched. Sukoon was started on port 3001. No Vercel redeploy was performed.
