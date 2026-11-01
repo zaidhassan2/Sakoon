@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sukoon-shell-v1';
+const CACHE_NAME = 'sukoon-shell-v2';
 
 const PRECACHE_URLS = [
   '/',
@@ -8,7 +8,6 @@ const PRECACHE_URLS = [
   '/js/app.js',
   '/js/config.js',
   '/js/api.js',
-  '/js/mock-api.js',
   '/js/storage.js',
   '/js/helplines.js',
   '/js/i18n/en.js',

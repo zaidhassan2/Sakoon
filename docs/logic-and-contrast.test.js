@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import { buildApiRequestPayload, resolveStateUiEmphasis } from '../public/js/api.js';
-import { evaluateMockScenario } from '../public/js/mock-api.js';
+import { evaluateMockScenario } from '../tests/fixtures/mock-api.js';
 import { filterVisibleHelplines } from '../public/js/helplines.js';
 import { computeBreathingTick } from '../public/js/exercises/breathing.js';
 import { parseBrainDumpLines } from '../public/js/exercises/brain-dump.js';

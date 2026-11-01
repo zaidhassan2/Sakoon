@@ -1,6 +1,6 @@
 /**
  * Mock API implementation for Sukoon.
- * Enabled via "?mock=1" in the URL query string (and shared with the dev server middleware).
+ * Test-only fixtures; never served to browsers.
  * Simulates all API contract scenarios:
  * - normal reply
  * - low_energy reply ("low-energy-test" or tired/exhausted cues)

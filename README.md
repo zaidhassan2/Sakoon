@@ -1,13 +1,13 @@
 # Sukoon backend
 
-Node ES-module Vercel functions serving the existing static frontend in `public/`. The backend needs no dependencies or build step. `/public` and the React/Vite source are unchanged. `npm run dev` now starts the real API and existing static frontend; `npm run dev:frontend` preserves the previous Vite mock workflow.
+Node ES-module Vercel functions serving the static frontend in `public/`. The app uses Node built-ins and browser APIs with no npm dependencies. `npm run dev` starts the real API and frontend. The unused React/Vite starter and browser mock-chat mode have been removed; mock fixtures are test-only.
 
 ## Setup from zero
 
-1. Install Node.js 22 or later. Run `npm install` for the existing frontend tooling; the backend itself uses Node built-ins and can run without that install.
+1. Install Node.js 22.x. Run `npm ci` to verify the dependency-free lockfile. `npm run lint` checks JavaScript syntax; `npm run build` copies the static frontend into `dist/` for artifact checks. Vercel serves `public/` directly and needs no build step.
 2. Copy `.env.example` to `.env`. Obtain a free Groq key from [Groq Console](https://console.groq.com/keys), or a Gemini key from [AI Studio](https://aistudio.google.com/apikey). Keep billing disabled for a free-only deployment. Do not put keys in frontend files or variables starting with `VITE_`.
 3. Set `GROQ_API_KEY`, keep `LLM_PROVIDER=groq` and `LLM_MODEL=openai/gpt-oss-120b`. Set a random `RATE_LIMIT_SECRET` using the command in `.env.example`. Never commit `.env`.
-4. Run `npm run dev`; open `http://localhost:3000` without `?mock=1`. `GET /api/health` works without a key. Ordinary chat returns 503 without a working provider; detected crisis messages still receive a supportive 200 fallback.
+4. Run `npm run dev`; open `http://localhost:3000`. `GET /api/health` works without a key. Ordinary chat returns 503 without a working provider; detected crisis messages still receive a supportive 200 fallback.
 5. Run `npm test`, `npm run contract-check`, then `npm run eval`. Evaluation prints responses to bundled synthetic fixtures only and takes about nineteen minutes at its default quota-safe pacing. Do not use it for real conversations. Missing credentials exit with code 2 rather than pretending evaluation passed.
 
 ## Deploy on Vercel Hobby

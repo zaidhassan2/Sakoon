@@ -1,6 +1,6 @@
 /**
  * Application-wide constants for Sukoon.
- * Keep the placeholder product name in this single config constant.
+ * Keep the product name in this single config constant.
  */
 export const APP_NAME = 'Sukoon';
 

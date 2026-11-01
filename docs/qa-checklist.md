@@ -1,6 +1,8 @@
 # Sukoon — QA Verification Checklist
 
-Every item below was executed and verified against the running application in headless Chromium (`playwright-cli`) and via automated Node unit tests (`npx --yes tsx --test docs/logic-and-contrast.test.js`).
+Historical frontend QA record: browser mock mode has since been removed and fixtures moved to `tests/fixtures/`. These recorded results are not a fresh deployment verification. Run current automated checks with `npm test`.
+
+Every item below was executed and verified against the running application in headless Chromium (`playwright-cli`) and via automated Node unit tests (`node --test docs/logic-and-contrast.test.js`).
 
 ## 1. Viewport & Responsive Layout Matrix
 

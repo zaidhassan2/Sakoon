@@ -1,5 +1,4 @@
 import { CONFIG } from './config.js';
-import { mockChatRequest } from './mock-api.js';
 
 /**
  * Pure helper to prepare and validate the POST /api/chat payload
@@ -76,15 +75,6 @@ export function resolveStateUiEmphasis(response, userAskedForExercise = false) {
   };
 }
 
-export function isMockModeEnabled(searchString = typeof window !== 'undefined' ? window.location.search : '') {
-  try {
-    const params = new URLSearchParams(searchString);
-    return params.get('mock') === '1';
-  } catch {
-    return false;
-  }
-}
-
 async function fetchWithTimeout(url, options, timeoutMs) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(new DOMException('Timeout', 'TimeoutError')), timeoutMs);
@@ -101,15 +91,11 @@ async function fetchWithTimeout(url, options, timeoutMs) {
 }
 
 /**
- * Sends chat request to POST /api/chat (or mock-api when ?mock=1 is active).
+ * Sends chat request to POST /api/chat.
  * Enforces 25s timeout and 1 automatic retry ONLY on network error.
  */
 export async function sendChatMessage({ moduleId, messages, country }) {
   const payload = buildApiRequestPayload({ moduleId, messages, country });
-
-  if (isMockModeEnabled()) {
-    return mockChatRequest(payload);
-  }
 
   const requestOptions = {
     method: 'POST',

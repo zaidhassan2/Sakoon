@@ -1,6 +1,6 @@
 # WCAG 2.2 AA Contrast Verification Report
 
-All colour tokens in `/public/css/styles.css` were verified programmatically using the WCAG 2.x relative luminance formula in `/docs/logic-and-contrast.test.js` (`npx --yes tsx --test docs/logic-and-contrast.test.js`).
+All colour tokens in `/public/css/styles.css` were verified programmatically using the WCAG 2.x relative luminance formula in `/docs/logic-and-contrast.test.js` (`node --test docs/logic-and-contrast.test.js`).
 
 ## 1. Adjustments Made to Suggested Starting Tokens
 

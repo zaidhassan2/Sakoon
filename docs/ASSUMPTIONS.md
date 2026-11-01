@@ -11,7 +11,7 @@
 
 ## Backend implementation (2026-10-31, Asia/Karachi)
 
-- Only owned backend/package/docs/config files were edited; `/public`, `src`, and `vite.config.ts` were left unchanged. `npm run dev` now uses `scripts/server.mjs` because the existing Vite middleware always mocks chat. `dev:frontend` retains that workflow.
+- Deployment cleanup (2026-11-01): removed the unused React/Vite starter and its dependencies. `npm run dev` uses `scripts/server.mjs` with the real API. Browser mock mode is removed; fixtures live under `tests/fixtures/`.
 - No real provider key is configured. Live model quality, free account access, and account-specific quotas remain unverified. Official Groq/Gemini model/API/rate-limit pages were consulted; links are in README and adapter comments. Public Gemini rate-limit docs direct owners to their active project quota, rather than promising a fixed universal free quota.
 - Free-only operation requires free-tier accounts with billing disabled. The application cannot enforce account billing settings. Upstash is optional, explicitly interpreting its requested adapter as an exception to the no-database/no-third-party constraint. Only quota counters are stored.
 - Crisis templates are used for all final crisis responses, providing predictable fallback text even on successful model calls. Earlier crisis follows the explicit elevated-floor contract. Stateless bounded history cannot preserve risk indefinitely.
